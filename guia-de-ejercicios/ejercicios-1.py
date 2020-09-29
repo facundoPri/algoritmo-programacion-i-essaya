@@ -1,3 +1,5 @@
+import math
+
 # ej 1.1 - ej 1.2
 print('ej 1.1 - ej 1.2')
 print('')
