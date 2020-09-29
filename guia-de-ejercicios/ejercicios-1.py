@@ -96,3 +96,16 @@ print('trianguloHipotenusa(5, 5)')
 print(trianguloHipotenusa(5, 5))
 
 
+# ej 1.4
+print('')
+print('ej 1.4')
+print('')
+
+print('a-')
+for i in range(5):
+    print(i * i)
+
+print('')
+print('b-')
+for i in range(2, 6):
+    print(i, 2 ** i)
