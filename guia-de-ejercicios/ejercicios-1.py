@@ -109,3 +109,68 @@ print('')
 print('b-')
 for i in range(2, 6):
     print(i, 2 ** i)
+
+# ej 1.5
+print('')
+print('ej 1.5')
+print('')
+
+
+def factorial(numero):
+    resultado = 1
+    for i in range(numero):
+        resultado = resultado * (i + 1)
+    return resultado
+
+
+print(factorial(2))
+print(factorial(5))
+
+
+# ej 1.6
+print('')
+print('ej 1.6')
+print('')
+
+print('')
+print('a-')
+
+
+def sum_res_div_mult(numero_1, numero_2):
+    suma = numero_1 + numero_2
+    resta = numero_1 - numero_2
+    divicion = numero_1 / numero_2
+    multipicacion = numero_1 * numero_2
+    print("Suma:", suma)
+    print("Resta:", resta)
+    print("Divicion:", divicion)
+    print("Multiplicacion:", multipicacion)
+
+
+sum_res_div_mult(10, 5)
+
+
+print('')
+print('b-')
+
+
+def tabla_multiplicacion(numero):
+    for i in range(10):
+        print(i+1, " * ",  numero, " = ", (i+1)*numero)
+
+
+tabla_multiplicacion(2)
+
+
+# ej 1.7
+print('')
+print('ej 1.7')
+print('')
+
+
+def repetir_1000(palabra):
+    for i in range(1000):
+        print(palabra, end=' ')
+
+
+repetir_1000('hola')
