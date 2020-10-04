@@ -78,7 +78,7 @@ print('f-')
 
 
 def esferaVolumen(radio):
-    return 4/3 * math.pi * radio ** 3
+    return 4 / 3 * math.pi * radio ** 3
 
 
 print('esferaVolumen(3)')
@@ -94,7 +94,6 @@ def trianguloHipotenusa(catetoOpuesto, catetoAdyacente):
 
 print('trianguloHipotenusa(5, 5)')
 print(trianguloHipotenusa(5, 5))
-
 
 # ej 1.4
 print('')
@@ -126,7 +125,6 @@ def factorial(numero):
 print(factorial(2))
 print(factorial(5))
 
-
 # ej 1.6
 print('')
 print('ej 1.6')
@@ -149,18 +147,16 @@ def sum_res_div_mult(numero_1, numero_2):
 
 sum_res_div_mult(10, 5)
 
-
 print('')
 print('b-')
 
 
 def tabla_multiplicacion(numero):
     for i in range(10):
-        print(i+1, " * ",  numero, " = ", (i+1)*numero)
+        print(i + 1, " * ", numero, " = ", (i + 1) * numero)
 
 
 tabla_multiplicacion(2)
-
 
 # ej 1.7
 print('')
