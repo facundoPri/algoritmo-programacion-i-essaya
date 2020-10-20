@@ -1,4 +1,8 @@
 def es_primo(n):
+    '''
+    Recibe un numero
+    Devuelve si este es primo o no en formato de booleano
+    '''
     if n <= 0:
         return False
     for i in range(2, n):
