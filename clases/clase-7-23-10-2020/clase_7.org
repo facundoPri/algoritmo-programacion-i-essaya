@@ -1,0 +1,55 @@
+#+TITLE: Clase 7 - batalla naval
+
+* Elementos del juego
+1. Tablero (Matriz de lista de listas)
+2. Barcos (Tuplas - coordenadas de posicion) -- ((1,1),(1,2))
+3. Interaccion con usuario
+4. Turnos
+5. Jugadores
+6. Adyacencias
+
+* Representacion del tablero
+[
+    [A,A,A],
+    [A,B,B],
+    [A,A,A]
+]
+* Formas de pensar el juego
+Despues de diseñar el juego
+1. Empezar por el ciclo principar, el main
+2. Ir sacando funciones de adentro de la main
+3. Crear las funciones que van surgiendo y asi para todas las necesarias
+4. Pensar si se esta emplementando bien
+5. Refactorar
+
+#+BEGIN_SRC python
+def crear_juego(n,m):
+    return 2 matrices de dimension: nxm
+
+
+def puedo_colocar(barco, coordenadas, juego):
+
+
+def inicializar_barcos(barcos, juego):
+    while barcos:
+        barco = elegir_barco()
+        coordenadas = pedir_coordenadas()
+        if not puedo_colocar(barco, coordenadas):
+            continue
+        barcos.remove(barco)
+
+
+def main():
+    juego = crear_juego(*DIMENSION)
+    jugador1, jugador2 = crear_jugador(), crear_jugador()
+    inicializar_barcos(jugador1)
+    inicializar_barcos(jugador2)
+    jugador_actual = jugador1
+    while not juego_este_terminado(juego):
+        if disparar(jugador_actual):
+            cambair_jugador_actual(jugador_actual)
+    print(conseguir_ganador(juego))
+#+END_SRC
+
+#+RESULTS:
+: None

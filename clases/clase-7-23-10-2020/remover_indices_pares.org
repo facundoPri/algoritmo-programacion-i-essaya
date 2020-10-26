@@ -1,0 +1,34 @@
+#+TITLE: Remover_indices_pares
+
+1. Metodo 1
+#+BEGIN_SRC python :results output
+def eliminar_posiciones_pares(lista):
+    elementos_en_posiciones_pares = []
+    for i in range(len(lista)):
+        if i % 2 == 0:
+            elementos_en_posiciones_pares.append(lista[i])
+    for elemento in elementos_en_posiciones_pares:
+        lista.remove(elemento)
+
+lista = [0,1,2,3,4,5,6,7,8,9,10]
+eliminar_posiciones_pares(lista)
+print(lista)
+#+END_SRC
+
+#+RESULTS:
+: [1, 3, 5, 7, 9]
+
+1. Metodo 2
+#+BEGIN_SRC python :results output
+def eliminar_posiciones_pares(lista):
+    for i in range(len(lista)-1,-1,-1):
+        if i%2 == 0:
+            lista.pop(i)
+
+lista = [0,1,2,3,4,5,6,7,8,9,10]
+eliminar_posiciones_pares(lista)
+print(lista)
+#+END_SRC
+
+#+RESULTS:
+: [1, 3, 5, 7, 9]
