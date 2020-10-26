@@ -1,0 +1,110 @@
+#+TITLE: Cadenas
+
+* Funciones para cadenas
+#+BEGIN_SRC python :results output
+
+a = 'Hola que tal'
+
+print(a.split(' '))
+print(len(a.split(' ')))
+
+text = " ".join(a.split(" "))
+print(text)
+palabras = text.split(' ')
+print(palabras)
+
+#+END_SRC
+
+#+RESULTS:
+: ['Hola', 'que', 'tal']
+: 3
+: Hola que tal
+: ['Hola', 'que', 'tal']
+
+** Ejercicio:
+Dado un texto, capitalizar cada oracion del mismo
+#+BEGIN_SRC python :results output
+def capitalizar_texto(texto):
+    capitalizado = ""
+    for oracion in texto.split(". "):
+        #capitalizado += oracion[0].upper() + oracion[1:] + ". "
+        capitalizado += oracion.capitalize() + '. '
+    return capitalizado
+
+
+print(capitalizar_texto("hola como esta. yo muy bien"))
+#+END_SRC
+
+#+RESULTS:
+: Hola como esta. Yo muy bien. 
+* Busqueda binaria
+Tenemos una candidad de pasajeros y un androide, hacemos un examen de sangre a un grupo o podemos sabes si el androide esta en ese grupo.
+Aplicamos la busqueda binaria y obtenemos el androide.
+
+** TODO NO FUNCIONA ARREGLAR
+#+BEGIN_SRC python :results output
+def hacer_analisis(pasajeros):
+    '''
+    Analisa un grupo de pasajeros y devuelve true o false si el androide esta presente
+    '''
+    return True in pasajeros
+    
+
+    
+def busqueda_binaria(pasajeros):
+    izq = 0
+    der = len(pasajeros) - 1
+    while izq <= der:
+        medio = (izq + der) // 2
+
+        if izq == derecha:
+            # Encontramos el androide
+            return medio
+
+        if hacer_analsis(pasajeros[izq:medio]):
+            # Seguimos buscando en el segmento de la izquierda
+            der = medio - 1
+        else:
+            # Seguimos buscando en el segmento de la izquierda
+            izq = medio + 1
+    return -1
+
+lista_pasajeros = [True, False, False, False, False, False]
+
+print(busqueda_binaria(lista_pasajeros))
+
+#+END_SRC
+* Ejercicio 8_5
+#+BEGIN_SRC python :results output
+def busqueda_binaria(lista, elem):
+    izq = 0
+    der = len(lista) - 1
+    while izq <= der:
+        med = (izq + der) // 2
+        if lista[med] == elem:
+            return med
+        if lista[med] < elem:
+            izq = med + 1
+        else:
+            der = med - 1
+
+    lista.insert(izq, elem)
+
+
+lista1 = [1, 2, 3, 4, 5, 6, 7]
+lista2 = [1, 5, 9, 45, 52, 61, 90]
+lista3 = []
+
+busqueda_binaria(lista1, 4)
+busqueda_binaria(lista2, 100)
+busqueda_binaria(lista3, 5)
+
+print(lista1)
+print(lista2)
+print(lista3)
+#+END_SRC
+
+#+RESULTS:
+: [1, 2, 3, 4, 5, 6, 7]
+: [1, 5, 9, 45, 52, 61, 90, 100]
+: [5]
