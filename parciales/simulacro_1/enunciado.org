@@ -1,0 +1,12 @@
+#+TITLE: Enunciado Simulacro Parcial 1
+
+1) Escribir un programa que pida dos números enteros al usuario (a y b) e imprima los primeros a múltiplos de b. El programa debe validar que cada número que ingrese el usuario sea un entero positivo y, en caso de que no lo sea, solicitarlo nuevamente (hasta que se ingrese algo correcto).
+
+2) Escribir una función que recibe una lista de cadenas y un número n y devuelve una nueva lista de cadenas donde cada cadena tiene longitud n (con una posible subcadena final de longitud menor a n) con el contenido de la lista de cadenas recibida.
+Ejemplo: subcadenas(["algoritmos", "es", "la", "mejor", "materia", 3) → ["alg", "ori", "tmo", "ses", "lam", "ejo", "rma", "ter", "ia"]
+
+3) Escribir una funcion que sacuda una matriz. Es decir, que las filas pares, las rote un elemento hacia la derecha, y las filas impares, hacia la izquierda. Esta función debe trabajar sobre la matriz recibida, no debe devolver una nueva. La matriz esta representada como una lista de listas donde cada sublista es una fila de la matriz. Ejemplo:
+1 2 3 11    11 1 2 3
+4 5 6 12 -> 5 6 12 4
+7 8 9 13    13 7 8 9
+
