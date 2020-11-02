@@ -1,0 +1,106 @@
+#+TITLE: TP1 - Tetris - Consigna
+
+El Tetris es un famoso videojuego de lógica estilo arcade de los años 80, en el cual el jugador debe ubicar distintas figuras que van cayendo en una grilla rectangular de modo de formar líneas horizontales.
+
+* Estado del juego 
+ El estado del juego se compone de dos elementos: la superficie consolidada y la pieza actual. Ambos elementos "conviven" en lo que se denomina la grilla del juego.
+* Grilla del juego:
+- El juego se desarrola en una *grilla* rectangula de F fiy C columnas, formando
+  así un total de ~F x C~ *celdas*.
+- Una celda puede contener:
+  + Un fragmento de la *supericie* consolidada,
+  + Un fragmento de la *pieza actual*,
+  + o puede estar vacia.
+- Tanto la superficie como la pieza actual siempre deben esta dentro de la grilla.
+* Desarrolo del juego
+- El juego inicia con la grilla vacia ( sin superficie ) y la pieza "actual"
+  arriba de todo centrada horzontalmente en la grilla. Esta es la "posición
+  incial" de las piezas.
+- El juego se desarrolla en pasos o /steps/. Al dial de cada /step/ la pieza
+  actual desciende una posición en la grilla.
+- Si al finalizar el /step/ la pieza no puee descender ya que colisionaría con
+  la superficie consolidada o porque se iría por el límite inferior de la
+  grilla, se debe consolidar la pieza con la superficie consolidada existente y
+  agregar una nueva pieza en la posición incila que pasará a ser la nueva pieza
+  actual. Consolidar la pieza con la superficie implica que todas las celdas que
+  están actualmente ocupadas por la pieza pasen a ser parte de la superficie.
+- Si en la superficie se formara una linea horizontal cubriendo la ~c~ celda,
+  esa línea deberá ser eliminada y todas las filas superiores a esta deberán
+  descender ocupando el lugar vacío.
+- Durante cada /step/ el jugador tiene la opción de mocer la pieza actual
+  libremente hacia la derecha o hacia la izquierda. El juefo original permite
+  también realizar una rotacíon de la pieza, que de momento no se va a implementar.
+** Resolucíon:
+- Si al intentar agregar una nueva pieza en la posición inicial la misma
+  colisiona con la superficie consolidada se considera que a partit de ese
+  momento el juego está terminado.
+
+Como es común en los juegos de tipo /arcade/, el juego nunca se gana, sólo se
+vuelve más dificil hasta que eventualmente se pierde.
+
+Hay una simplificación realizada respecto del juego original en este punto. En
+el juego original las piezas podrian estar "parcialmente" en la grilla. En
+nuestro caso la pieza tiene que entrar completamente. Si no entra entonces
+consideramos el juego como termindo.
+* Consigna
+El objetico de este trabajo es implementar las funciones para controlar la
+lógica principal del juego, sin interacción con el usuario, Para esto se provee
+el archivo ~tetris.py~ que contiene las definiciones y documentación de las
+funciones que se deben completar. Se debe leer y entender la documentación y
+escribir el código correspondiente.
+Dentro del archivo van a encontrar varia definiciones como la siguiente:
+
+#+BEGIN_SRC python
+def crear_juego(pieza_inicial):
+    """
+    Crea un nuevo juego de Tetris.
+
+    El parámetro pieza_inicial debe ser una pieza obtenida mediante 
+    pieza.generar_pieza. Ver documentación de esa función para más información.
+
+    El juego creado debe cumplir con lo siguiente:
+    - La grilla está vacía: hay_superficie da False para todas las ubicaciones
+    - La pieza actual está arriba de todo, en el centro de la pantalla.
+    - El juego no está terminado: terminado(juego) da False
+
+    Que la pieza actual esté arriba de todo significa que la coordenada Y de 
+    sus posiciones superiores es 0 (cero).
+    """
+    return '???'
+#+END_SRC
+ 
+Se debe reemplazar ~return '???'~ con el código correspondiente.
+**  Nota:
+La función ~crear_juego~ que se muestra en el ejemplo no especifica en la documentación qué tipo de dato devuelve. Parte del objetivo del TP es que vos decidas cuál es la estructura de datos más apropiada para representar el juego. Cualquier función que requiera un ~juego~ como primer parámetro estará recibiendo un juego creado previamente con tu función ~crear_juego~.
+
+Si la estructura fue bien elegida la implementación de todas las funciones será sencilla.
+* Puebas
+Se dispone de un archivo de pruebas que permite verificar si la implementación
+cumple los requisitos /minimos e indispensables/ para realizar una entrega. Que
+la pruebas pasen *no implica* que el trabajo esté automáticamente aprobado ni
+que la implementación sea correcta.
+
+Las pruebas *no son exhaustivas* ni mucho menos, sólamente realizan cierta
+comprobaciones básicas para que puedas solucionar algunos errores sin tener que
+esperar la respuesta de tu corrector.
+
+Para utilizalo, copiá el archivo ~tetris-test.py~ en la misma carpeta que
+~tetris.py~, y ejecutá:
+#+BEGIN_SRC shell
+python3 tetris-test.py
+#+END_SRC
+
+Si las pruebas pasan, se imprimirá un mensaje indicándolo. En caso contrario, se
+imprime un mensaje de error indicando el nombre de la pueba que falló.
+
+** Algunos tips por si las pruebas fallan
+Cada prueba es una función dentro del archivo ~teris-test.py~. Si alguna prueba
+falla, te recomendamos que leas el código de la prueba que haya fallado antes de
+intentar resolver los problemas de las pruenas siguientes.
+* Material
+** [[file:teris.py][tetris.py]] 
+** [[file:tetris-test.py][tetris-test.py]] 
+* Entrega
+Se deberá entragar el archivo ~tetris.py~ utilizando el
+[[https://algoritmos1rw.ddns.net/entregas/][formularion de entregas]].
+
