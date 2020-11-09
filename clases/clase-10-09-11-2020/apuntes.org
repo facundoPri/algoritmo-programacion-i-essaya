@@ -1,0 +1,104 @@
+#+TITLE: Apuntes Clase
+
+* Readlines
+Si uno no conoce el archivo es recomendado no usarlo ya que se carga todo en la
+memoria ram de la compu
+Un archivo de 1gb por ejemplo puede llegar a pesar 8gb en ram
+* Ejercicio 11.1
+Escribir una funcion, llamada head que recibe un archivo y un nuemro N e imprima
+las primeras N lineas del archivo
+** Respuesta
+#+BEGIN_SRC python :results output
+def head(nombre, n):
+    with open(nombre) as f:
+        contador = 0
+        for lineas in f:
+            if not contador < n:
+                break
+            print(linea, end="")
+            contador += 1
+#+END_SRC
+** Tener en cuenta
+no se puede iterar por indice un archivo y tampoco acceder una propiedad len()
+* Ejercicio 11
+Escibir una funcion cargar_datos que dado un archivo con formato
+`materia,fecha_final`
+cargue en un diccionario las fechas de finales para cada materia.
+** Resultado
+#+BEGIN_SRC python
+def cargar_datos(ruta):
+    materias = {}
+    with open(ruta) as f:
+        for linea in f:
+            materia, fecha = linea.rstrip().split(",")
+            materia[materia] = fecha
+    return materia
+#+END_SRC
+*** notas
+podemos usar rstrip() para sacar los espacios a la derecha (rigth)
+lstrip() para sacar los de la izquierda
+strip para lo de los dos lados
+** Si queremos guardar esto en un archivo
+#+BEGIN_SRC python
+def guardar_datos(datos,ruta):
+    with open(ruta, 'w') as f:
+        for materia, fecha in datos.items():
+            f.write(f'{materia},{fecha}\n')
+#+END_SRC
+*** nota
+Si la ruta no existe la crea con el open w
+* argv
+** Uso de argv
+paso una especie de parametro cuando se ejecuta un programa
+#+BEGIN_SRC python
+import sys
+
+
+def head(nombre, n):
+
+    with open(nombre) as archivo:
+        contador = 0
+        for linea in archivo:
+            if contador >= n:
+                break
+            print(linea, end="")
+            contador += 1
+
+
+def main():
+    parametros = sys.argv
+    head(sys.argv[1], int(sys.argv[2]))
+    return 0
+
+
+main()
+#+END_SRC
+* Ejercicio 11.5 + argv
+#+BEGIN_SRC python
+import sys
+from string import ascii_lowercase as letras
+
+
+def rotN_archivos(ruta_origen, ruta_destino, n):
+    with open(ruta_origen) as origen, open(ruta_destino, "w") as destino:
+        for linea in origen:
+            destino.write(rotN_cadena(linea, n))
+
+
+def rotN_cadena(cadena, n):
+    encriptado = ""
+    for letra in cadena:
+        if letra not in letras:
+            encriptado += letra
+            continue
+        encriptado += letras[(letras.index(letra) + n) % len(letras)]
+    return encriptado
+
+
+def main():
+    rotN_archivos(sys.argv[1], sys.argv[2], int(sys.argv[3]))
+    return 0
+
+
+main()
+#+END_SRC
