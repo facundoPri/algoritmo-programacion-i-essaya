@@ -1,3 +1,5 @@
+from random import randint
+
 ANCHO_JUEGO, ALTO_JUEGO = 9, 18
 IZQUIERDA, DERECHA = -1, 1
 CUBO = 0
@@ -30,7 +32,9 @@ def generar_pieza(pieza=None):
     I se devolverá: ( (0, 0), (0, 1), (0, 2), (0, 3) ), indicando que
     ocupa las posiciones (x = 0, y = 0), (x = 0, y = 1), ..., etc.
     """
-    return pieza and PIEZAS[pieza]
+    if not pieza:
+        pieza = randint(CUBO, T)
+    return PIEZAS[pieza]
 
 
 def trasladar_pieza(pieza, dx, dy):
@@ -54,11 +58,11 @@ def trasladar_pieza(pieza, dx, dy):
 
 
 def centrar_pieza(pieza):
-    '''
+    """
     Recibe una pieza (tupla de tupla)
     Devuelve la pieza centrada en el juego
-    '''
-    pieza_centrada = trasladar_pieza(pieza, ANCHO_JUEGO//2, 0)
+    """
+    pieza_centrada = trasladar_pieza(pieza, ANCHO_JUEGO // 2, 0)
     return pieza_centrada
 
 
@@ -110,7 +114,8 @@ def pieza_actual(juego):
     posicion = []
     for y, fila in enumerate(juego):
         for x, columna in enumerate(fila):
-            columna[1] and posicion.append((x, y))
+            if columna[1]:
+                posicion.append((x, y))
     return tuple(posicion)
 
 
@@ -125,9 +130,9 @@ def hay_superficie(juego, x, y):
 
 
 def validar_posicion(pieza, juego):
-    '''
+    """
     Recibe una pieza y valida si esta colidiendo con alguna superficie
-    '''
+    """
     for posicion in pieza:
         x, y = posicion
         if not (0 <= x < ANCHO_JUEGO and 0 <= y < ALTO_JUEGO):
@@ -150,10 +155,10 @@ def cambiar_posicion(juego, posicion):
 
 
 def modificar_estado_juego(posicion_actual, nueva_posicion, juego):
-    '''
+    """
     Recibe la posicion actual y la nueva de una pieza y el juego
     Remueve la posicion anterior y agrega a nueva al estado del juego
-    '''
+    """
     nuevo_estado = juego
     for posicion in zip(posicion_actual, nueva_posicion):
         cambiar_posicion(nuevo_estado, posicion[0])
@@ -178,10 +183,10 @@ def mover(juego, direccion):
 
 
 def tranformar_a_superficie(juego, pieza):
-    '''
+    """
     Recibe un juego y una pieza
     Devuelve un estado de juego donde la pieza pasa a superficie
-    '''
+    """
     nuevo_estado = juego
     for posicion in pieza:
         x, y = posicion
@@ -191,10 +196,10 @@ def tranformar_a_superficie(juego, pieza):
 
 
 def buscar_lineas_completas(juego, pieza):
-    '''
+    """
     Recibe un juego y una pieza
     Devuelve una lista de lineas para remover
-    '''
+    """
     lineas = []
     for posicion in pieza:
         altura = posicion[1]
@@ -205,21 +210,21 @@ def buscar_lineas_completas(juego, pieza):
 
 
 def remover_linea(juego, linea):
-    '''
+    """
     Recibe un juego y una linea
     Devuelve un estado de juego donde esta linea no esta mas, sin alterar la altura de juego
-    '''
+    """
     nuevo_estado = juego
     nuevo_estado.pop(linea)
-    nuevo_estado.insert(0, [[False, False]]*ANCHO_JUEGO)
+    nuevo_estado.insert(0, [[False, False]] * ANCHO_JUEGO)
     return nuevo_estado
 
 
 def remover_lineas_completas(juego, lineas):
-    '''
+    """
     Recibe un juego y una tupla
     Devuelve un estado de juego removiendo las lineas citadas en la tupla
-    '''
+    """
     nuevo_estado = juego
     for linea in lineas:
         nuevo_estado = remover_linea(nuevo_estado, linea)
@@ -227,10 +232,10 @@ def remover_lineas_completas(juego, lineas):
 
 
 def posicionar_nueva_pieza(juego, pieza):
-    '''
-    Recibe un juego y una pieza 
+    """
+    Recibe un juego y una pieza
     Devulve es estado de juego con la nueva pieza posicionada
-    '''
+    """
     nuevo_estado = juego
     for posicion in pieza:
         cambiar_posicion(nuevo_estado, posicion)
@@ -277,16 +282,14 @@ def avanzar(juego, siguiente_pieza):
         nuevo_estado = modificar_estado_juego(pieza, nueva_posicion, juego)
         return (nuevo_estado, False)
     # pieza coliciona
-    else:
-        # pieza coliciona en altura 0
-        if pieza[0][1] == 0:
-            return (juego, False)
-        nuevo_estado = tranformar_a_superficie(nuevo_estado, pieza)
-        lineas_remover = buscar_lineas_completas(nuevo_estado, pieza)
-        nuevo_estado = remover_lineas_completas(nuevo_estado, lineas_remover)
-        nueva_pieza = trasladar_pieza(siguiente_pieza, ANCHO_JUEGO // 2, 0)
-        nuevo_estado = posicionar_nueva_pieza(nuevo_estado, nueva_pieza)
-        return (nuevo_estado, True)
+    if pieza[0][1] == 0:  # pieza coliciona en altura 0
+        return (juego, False)
+    nuevo_estado = tranformar_a_superficie(nuevo_estado, pieza)
+    lineas_remover = buscar_lineas_completas(nuevo_estado, pieza)
+    nuevo_estado = remover_lineas_completas(nuevo_estado, lineas_remover)
+    nueva_pieza = trasladar_pieza(siguiente_pieza, ANCHO_JUEGO // 2, 0)
+    nuevo_estado = posicionar_nueva_pieza(nuevo_estado, nueva_pieza)
+    return (nuevo_estado, True)
 
 
 def terminado(juego):
