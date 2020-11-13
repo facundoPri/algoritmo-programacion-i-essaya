@@ -1,0 +1,104 @@
+#+TITLE: Clase 11
+* Ejercicio csv
+Implementar una funcion que dado el nombre de un archivo de la forma
+<pelicula>;<año>;<actor1,actor2...> devuelve un diccionario donde cada actor
+asociado una lista con todos los años en los que actuó (puede haber años
+repetidos). Cualquier línea con datos inválidos (cualquier campo vacio, año no
+es un numero) debe ser ignorada. Se puede suponer que todas las lineas contienen
+siempre tres elementos sepasados por ;
+** Sin csv
+#+BEGIN_SRC python
+def anios_activo(ruta_archivo):
+    dict_actores = {}
+    with open(ruta_archivo) as archivo:
+        next(archivo)
+        for liena in archivo:
+            campos = linea.rstrip().split(";")
+            if len(campos) != 3 or not campos[1].isdigit():
+                continue
+
+            pelicula, anio, actores = campos
+            lista_actores = actores.split(",")
+            for actor in lista_actores:
+                dict_actores[actor] = dict_actores.get(actor, [])
+                dict_actores[actor].append(int(anio))
+    return dict_actores
+#+END_SRC
+** Con csv
+#+BEGIN_SRC python
+import csv
+
+
+def anios_activo(ruta_archivo):
+    dict_actores = {}
+    with open(ruta_archivo) as archivo:
+        lector = csv.reader(archivo, delimiter=";")
+        for campos in lector:
+            if len(campos) != 3 or not campos[1].isdigit():
+                continue
+
+            pelicula, anio, actores = campos
+            lista_actores = actores.split(",")
+            for actor in lista_actores:
+                dict_actores[actor] = dict_actores.get(actor, [])
+                dict_actores[actor].append(int(anio))
+    return dict_actores
+#+END_SRC
+
+** Con csv + DictReader
+#+BEGIN_SRC python
+import csv
+
+
+def anios_activo(ruta_archivo):
+    dict_actores = {}
+    with open(ruta_archivo) as archivo:
+        lector = csv.DictReader(archivo, delimiter=";", fieldnames=[])
+        for campos in lector:
+            if not campos['anio'].isdigit():
+                continue
+
+            lista_actores = campos['reparto'].split(",")
+
+            for actor in lista_actores:
+                dict_actores[actor] = dict_actores.get(actor, [])
+                dict_actores[actor].append(int(campos['anio']))
+    return dict_actores
+#+END_SRC
+*** extra
+le podemos pasar fieldnames al dictreader con una lista de nombres para los headers
+* Ejercicio try except
+#+BEGIN_SRC python
+MENSAJE = "Ingrese un numero entero: "
+
+
+def es_entero(num):
+    try:
+        int(num)
+    except ValueError:
+        return False
+    return True
+
+
+def pedir_entero():
+    numero = input(MENSAJE)
+    while not es_entero(numero):
+        numero = input(MENSAJE)
+    print("El numero entero es: {}".format(int(numero)))
+#+END_SRC
+#+BEGIN_SRC python
+def dividir(n1,n2):
+    '''
+    Si algo no es numero entero, levantar TypeError.
+    Si se divide por 0, levantar ValueError.
+    Siempre se imprime un mensaje indicando que fue llamada.
+    '''
+    try:
+        return int(n1)/int(n2) 
+    except ValueError:
+        raise TypeError('No ingresaste un entero')
+    except ZeroDivisionError:
+        raise ValueError('No se puede dividir por 0')
+    finally:
+        print('Se llamo a la funcion dividir')
+#+END_SRC
