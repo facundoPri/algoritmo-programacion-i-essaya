@@ -7,9 +7,7 @@ FILAS_CANTIDAD = 10
 
 def juego_crear():
     """Inicializar el estado del juego"""
-    grilla = []
-    for fila in range(FILAS_CANTIDAD):
-        grilla.append([""] * FILAS_CANTIDAD)
+    grilla = [[""] * FILAS_CANTIDAD for i in range(FILAS_CANTIDAD)]
     return grilla
 
 
@@ -31,13 +29,13 @@ def averiguar_turno(juego):
     return "X" if cantidad_o > cantidad_x else "O"
 
 
-def tranformar_pixeles_posicion(px_x, px_y, filas, grilla_px):
+def tranformar_pixeles_posicion(px_x, px_y):
     """
-    Recibe las posiciones x e y en pixeles, la cantidad de filas en la grilla y su tamaño en pixeles
+    Recibe las posiciones x e y en pixeles
     Devuelve la pasicion en la grilla matriz de x e y
     """
-    step = grilla_px // filas
-    return px_x // step, px_y // step
+    pasos = GRILLA_PX // FILAS_CANTIDAD
+    return px_x // pasos, px_y // pasos
 
 
 def juego_actualizar(juego, px_x, px_y):
@@ -52,15 +50,14 @@ def juego_actualizar(juego, px_x, px_y):
     if not (0 <= px_x <= GRILLA_PX and 0 <= px_y <= GRILLA_PX):
         return estado_juego
     turno = averiguar_turno(juego)
-    x, y = tranformar_pixeles_posicion(px_x, px_y, FILAS_CANTIDAD, GRILLA_PX)
+    x, y = tranformar_pixeles_posicion(px_x, px_y)
     if not estado_juego[y][x]:
         estado_juego[y][x] = turno
     return estado_juego
 
 
-def crear_tablero(juego):
+def crear_tablero():
     """
-    Recibe la grilla del juego
     Dibuja el tablero del juego
     """
     filas_px = GRILLA_PX // FILAS_CANTIDAD
@@ -69,13 +66,14 @@ def crear_tablero(juego):
         gamelib.draw_line(0, fila, GRILLA_PX, fila, fill="white", width=1)
 
 
-def tranformar_posicion_pixeles(x, y, filas, grilla_px):
+def tranformar_posicion_pixeles(x, y):
     """
-    Recibe las posiciones x e y en la grilla matriz, la cantidad de filas en la grilla y su tamaño en pixeles
+    Recibe las posiciones x e y en la grilla matriz
     Devuele las posiciones x e y en pixeles
     """
-    step = grilla_px // filas
-    return (x * step) + step // 2, (y * step) + step // 2
+    pasos = GRILLA_PX // FILAS_CANTIDAD
+    mitad = pasos // 2
+    return x * pasos + mitad, y * pasos + mitad
 
 
 def posicionar_piezas(juego):
@@ -86,15 +84,13 @@ def posicionar_piezas(juego):
     for y, fila in enumerate(juego):
         for x, valor in enumerate(fila):
             if valor:
-                px_x, px_y = tranformar_posicion_pixeles(
-                    x, y, FILAS_CANTIDAD, GRILLA_PX
-                )
+                px_x, px_y = tranformar_posicion_pixeles(x, y)
                 gamelib.draw_text(valor, px_x, px_y, size=15)
 
 
 def juego_mostrar(juego):
     """Actualizar la ventana"""
-    crear_tablero(juego)
+    crear_tablero()
     posicionar_piezas(juego)
     turno = averiguar_turno(juego)
     gamelib.draw_text(
