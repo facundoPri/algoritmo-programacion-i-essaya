@@ -1,0 +1,58 @@
+#+TITLE: Apuntes clase
+* Objetos
+** clase fraccion
+#+BEGIN_SRC python
+class Fraccion:
+    def __init__(self, numerador, denominador):
+        if denominaror == 0:
+            raise ZeroDivisionError("No puedo dividir por 0")
+        self.numerador = int(numerador)
+        self.denominador = int(denominador)
+
+    def simplificar(self):
+        """Simplifica la propia fraccion"""
+        mcd = 1
+        for i in range(2, min(self.denominador, self.numerador)):
+            if self.denominador % i == 0 and self.numerador % i == 0:
+                mcd = i
+        return Fraccion(int(self.numerador / mcd), int(self.denominador / mcd))
+
+    def __add__(self, otro):
+        nuevo_denominador = self.denominador * otro.denominador
+        nuevo_numerador = (
+            self.numerador * otro.numerador + otro.numerador * self.denominador
+        )
+        return Fraccion(nuevo_numerador, nuevo_denominador).simplificar()
+
+    def __str__(self):
+        return f"{self.numerador} / {self.denominador}"
+
+    def __repr__(self):
+        return f"Fraccion({self.numerador},{self.denominador})"
+#+END_SRC
+** Ejercicio de parcial
+#+BEGIN_SRC python
+class Vector:
+    def __init__(self, coordenadas):
+        if coordenadas == []:
+            raise ValueError('No se puede crear un vector vacio')
+        self.coordenadas = coordenadas
+
+    def norma(self):
+        norma = 0
+        for coordenada in self.coordenadas:
+            norma += coordenada ** 2
+        return norma ** 0.5
+
+    def __str__(self):
+        return str(tuple(self.coordenadas))
+    
+    def __add__(self,otro):
+        if not len(self.coordenadas) == len(otro.coordenadas)
+            raise ValueError("No se puede sumar dos vectores de distintas dimensiones")
+        nuevas_coordenadas = []
+        for i in range(len(self.coordenadas)):
+            nuevas_coordenadas.append(self.coordenadas[i]+otro.coordenadas[i])
+        return Vector(nuevas_coordenadas)
+
+#+END_SRC
