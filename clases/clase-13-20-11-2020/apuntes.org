@@ -1,0 +1,56 @@
+#+TITLE: Apuntes
+* Simplificacion de discord
+** Objetos
+- Usuario
+- Servidor 
+- Canales
+- Roles
+- Categorias
+** Usuario - Servidor
+- Conectar
+- Enviar mensajes
+- Permisos
+- Desconectar
+** Clases
+  #+BEGIN_SRC python
+class Canal:
+    def __init__(self):
+        self.usuarios = []
+
+class Servidor:
+    def __init__(self):
+        self.usuarios = []
+        self.canales = []
+
+    def agregar_usuario(self, usuario):
+        self.usuario.append(usuario)
+    
+    def enviar_mensaje(self,emisor, mensaje):
+        for usuario in self.usuarios:
+            usuario.recibir_mensaje(emisor,mensaje)
+
+    def crear_canal(self, canal):
+        self.canales.append(canal)
+            
+class Usuario:
+    def __init__(self, nombre):
+        self.username = nombre
+        self.servidor = None
+        
+    def conectar(self):
+        self.servidor = servidor
+        servidor.agregar_usuario(self)
+        
+    def enviar_mensajes(self, mensaje):
+        self servidor.enviar_mensaje(mensaje)
+        
+    def recibir_mensaje(self, emisor, mensaje):
+        print(f"{emisor}: {mensaje}\n")
+
+    def __str__(self):
+        return self.username
+
+    def __repr__(self):
+        return f"Usuario({self.username})"
+        
+  #+END_SRC
