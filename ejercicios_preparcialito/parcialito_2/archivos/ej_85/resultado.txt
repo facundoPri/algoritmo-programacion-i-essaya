@@ -1,0 +1,5 @@
+Nombre,Puntuaje Max
+facu,7
+willy,6
+nico,9
+frang,6

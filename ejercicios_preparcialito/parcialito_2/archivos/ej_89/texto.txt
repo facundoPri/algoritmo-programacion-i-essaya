@@ -1,0 +1,6 @@
+Este es el texto que voy a usar para el ejercicio 89.
+Apenas lo necesito para hacer un promerio de la cantidad de letras que hay en este mismo.
+Lo que pienso hacer es contar la cantidad de letras que hay en el texto y la cantida de palabras.
+Recien vi que una alternativa interesante es hacer un len al texto y restarle los espacios.
+Y depues para la cantidad de palabras se puede hacer un split y un len al resultado del split.
+Me gusta.
