@@ -23,7 +23,6 @@ class Vaca:
     def sondear(self):
         return "Muuuuu!"
 
-
 class Ovni:
     def __init__(self, nombre):
         self.nombre = nombre

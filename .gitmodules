@@ -1,0 +1,6 @@
+[submodule "tps/tp3_codenames"]
+	path = tps/tp3_codenames
+	url = https://github.com/facundoPri/algo_1_tp3_codenames.git
+[submodule "tps/ej2_gamelib/python-gamelib"]
+	path = tps/ej2_gamelib/python-gamelib
+	url = https://github.com/dessaya/python-gamelib.git

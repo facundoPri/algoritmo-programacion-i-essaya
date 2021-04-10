@@ -1,0 +1,227 @@
+#+TITLE: Clase 20 - C
+* Libros interesantes para leer de C
+** El lenguaje de progrmacion C
+*** Esta hasta el estandar c89
+** C programming
+** Modern C
+* Muchos lenguajes baseados en C
+** C++
+** Objecive-c
+** Perl
+** Python
+** Php
+** Java
+** JavaScript
+** C#
+* Algunas cosas hechas en C
+** Software
+*** Ruby
+*** Python
+*** Php
+*** Windows
+*** Linux
+*** Mac Os
+*** Nginx
+*** Apache
+*** Git
+*** Redis
+*** PostgresSQL
+** Hardware
+*** Muchos usos en hardware enduido
+* Python es un lenguaje interpretado
+* C es un lenguaje compilado
+** Archivo escrito es un .c
+** Necesitamos instalar un compilador
+** Este compilador recibe el .c y devuelve un ejecutable
+** Podemos finalmente agarrar y ejecutar el ejecutable
+** Problematica del compilador
+*** El compilado esta hecho para la plataforma en que fue compilado
+* Hola Mundo
+#+begin_src C
+#include <stdio.h>
+
+int main() {
+  printf("Hello World!\n");
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Hello World!
+** Al poner int adelante de la funcion decimos que esta devuelve un entero
+** La funcion main devuelve 0 ya que por convencion esto significa que esta todo bien
+** Para compilarlo podemos hacer ~clang <archivo.c> -o <salida>~
+* Python es un lenguaje con tipado dinamico
+** Una variable puede cambiar de tipo sin ningun problema
+* C es un lenguaje con tipado estatico
+** Una variable esta asociado con un tipo
+#+begin_src C
+int a;
+
+a = 5;
+a = 3.14;   // Guarda 3
+a = "Hola"; // ??
+#+end_src
+* Python tiene recolector de basura
+** Si nada apunta a un valor, python ira liverando la basura, limpiando esa memoria
+* En C, la memoria es administrada por el programador
+** Tenemos un stack y un heap
+** El stack es donde se guarda normalmente una variable
+** Todo se guarda en el stack
+** El stack es una pila, entonce si necesito una variable para una funcion, cuando esta se termian de ejecutar se elimina el valor de la pila
+** En el heap podemos guardar espacios de memoria que persisten
+*** Con malloc y free podemos manipular este espacio
+*** Es necesario recervar memoria con malloc y liverala con free
+* Declaraciones y definiciones
+#+begin_src C
+int a;
+a = 6;
+
+float b = 8.5;
+
+/* Los dos son valodos */
+
+/* Basura ejemplo */
+float c;
+printf("%d\n", c);
+#+end_src
+** Una variable no definida contiene basura
+*** Osea lo que tenia la memoria en el mometo de usarla
+* Tipos de datos
+** Enteros
+*** Signed
+**** desde -128 hasta 127
+**** ej: char o signed char
+*** Unsigned
+**** desde 0 a 255
+**** ej: unsigned char
+*** Si me paso de maximo vuele al pricipio: overflow
+*** Tipos de numeros enteros
+**** char : 8bit
+**** short: 16bit
+**** int: 32bit
+**** long: 64bit
+** Flotantes
+Funcionan como notacion cientifica
+*** Float: 32bit - 7 digitos decimales
+*** Double: 64bit - 16 digitos decimales
+* Literales
+#+begin_src C
+char x = 97;
+
+/* 97 int */
+/* 97U unsigned int */
+/* 97L long */
+/* 97.0 double */
+/* 97.9F float */
+/* 'a' int (ASCII 97 = 'a') */
+/* '\x61' int (97 decimal= 0x61 hex) */
+
+#+end_src
+* Arreglos
+#+begin_src C
+int numeros_lost[] = {4, 8, 15, 16, 23, 42};
+/* 32bit * cantidad de elementos */
+numeros_lost[2] = 0;
+/* Forma de cambiar un valor */
+#+end_src
+Un arreglo no puede cambiar de tamaño normalmente
+* Cadenas (arreglos de char)
+#+begin_src C
+char s[] = "hola";
+char s[] = {104, 11, 108, 97, 0};
+char s[] = {'h', 'o', 'l', 'a'};
+/* El ultimo valor de un arreglo es 0, valor nul */
+/* Los arreglos tambien son mutables  */
+#+end_src
+* Funciones
+#+begin_src C
+int sumar(int a, int b); // Declarar
+
+int sumar(int a, int b) { return a + b; } // Definir
+
+sumar(5, 4); // Llamar
+#+end_src
+Se tiene que definir o declarar la funcion antes de ser llamada
+Una funcion void no devuelve nada
+* PRACTICA
+** EJ 17.1
+#+begin_src C
+#include <stdio.h> // Para poder imprimir
+
+void imprimir_area_rectangulo(int base, int altura) {
+  int resultado = base * altura;
+  printf("%d\n", resultado);
+}
+
+int main() {
+  imprimir_area_rectangulo(3, 2);
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 6
+** Ej 17.2
+#+begin_src C
+#include <stdio.h>
+
+int factorial(int n) {
+  int resultado = 1;
+  for (int i = 1; i <= n; i++) {
+    resultado *= i;
+  }
+  return resultado;
+}
+
+int main() {
+  int resultado = factorial(5);
+  printf("%d\n", resultado);
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 120
+*** Version recursiva
+#+begin_src C
+#include <stdio.h>
+
+int factorial(int n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+int main() {
+  int resultado = factorial(5);
+  printf("%d\n", resultado);
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 120
+** Ej 17.3
+#+begin_src C
+#include <stdio.h>
+
+int calcular_promedio(int numeros[], int cantidad) {
+  int suma = 0;
+  for (int i = 0; i < cantidad; i++) {
+    suma += numeros[i];
+  }
+  return suma / cantidad;
+}
+
+int main() {
+  int numeros[] = {7, 8, 4, 10, 3};
+  int resultado = calcular_promedio(numeros, 5);
+  printf("%d\n", resultado);
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 6

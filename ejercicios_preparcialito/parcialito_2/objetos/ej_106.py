@@ -1,5 +1,6 @@
 """
-Escribir la clase Polinomio, utilizando una lista para guardar los coeficientes del mismo. Debe permitir las siguientes operaciones:
+Escribir la clase Polinomio, utilizando una lista para guardar los coeficientes
+del mismo. Debe permitir las siguientes operaciones:
 
 >>> p1 = Polinomio([2, 0, -1, 3])     >>> p1 == Polinomio([2, 0, -1, 3])
 >>> print(p1)                         True
@@ -10,7 +11,8 @@ Escribir la clase Polinomio, utilizando una lista para guardar los coeficientes 
 >>> p1 == p2                          "2x^3 + x^2 - 2"
 False
 
-Nota: no es necesario que el resultado de str() sea exactamente como en el ejemplo. Es válido también una representación como 2x^3 - 1x^1 + 3x^0
+Nota: no es necesario que el resultado de str() sea exactamente como en el
+ejemplo. Es válido también una representación como 2x^3 - 1x^1 + 3x^0
 """
 
 

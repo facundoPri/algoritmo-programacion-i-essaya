@@ -1,0 +1,15 @@
+#+TITLE: Clase_19 - algoritmos de ordenamiento
+* Mergesort
+Es un algoritmo recursivo
+Es un algoritmo n*log*n lo que es bastante bueno, mucho mejor que insercion y seleccion
+No es un algoritmo in place, necesita memoria adicional
+Divide la lista a la mitad llama mergesort para cada mitad y despues las junta ordenandolas con el algoritmo merge
+** Merge
+Recibe dos mitades de una lista compara sus primeros indices diciendo cual es el menor y los agrega a una nueva lista que sera la final
+* Quicksort
+Es un algoritmo recursivo, no in-place pero se puede hacer in place con unas modificaciones
+Es un algoritmo N log N en el mejor de los casos y en el peor es n ** 2
+Se puede modificar para que sea in place y que ocupe log N en memoria
+Llama a particionar que devuelve  un elemento cualquiera (pivote) y un lista con los elementos que viene antes y otra con los quie viene aca
+Esas dos listas las pasamos por quicksort
+Y por ultimo concatenamos las listas resultantes poniendo el elemento pivote en el medio

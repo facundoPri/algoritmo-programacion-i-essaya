@@ -1,0 +1,14 @@
+Ej_2 - Para cada arreglo de numeros listado a continuación, mencionar qué algoritmo utilizaría para ordenarlo de manera ascendente de manera que sea lo más eficiente posible. Justificar la decisión explicando por qué el algoritmo es el mejor para el caso y mencionar cuál es la complejidad temporal que tiene para el caso.
+Importante: la mejor manera de ordenar no necesariamente es uno de los 4 algoritmos de ordenamiento que vimos en clase.
+a) [1,0,2,3,4,6,7,5,8,9]
+b) [0,9,5,4,7,2,3,8,1,6]
+c) [9,8,7,6,5,4,3,2,1,0]
+
+a) [1,0,2,3,4,6,7,5,8,9]
+Para esta lista el mejor algoritmo que podemos utilizar es insercion ya que su mejor caso (cuando la lista esta casi ordenada) es O(n) y como podemos ver esta lista esta casi ordenada de manera ascendente, por eso mismo el algoritmo seria casi un T(n).
+
+b) [0,9,5,4,7,2,3,8,1,6]
+Para este caso el mejor algoritmo que podemos utilizar es mergesort ya que siempre sera O(n log n), mientras que insercion y seleccion serian O(n^2), junto con el peor caso de quicksort (donde el pivot el elegido inadecuadamente)
+
+c) [9,8,7,6,5,4,3,2,1,0]
+Esta es una lista ordenada de forma decrecente el algoritmo mas adecuado para este caso es invertirla, invertir una lista es O(n)
